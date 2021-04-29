@@ -1,7 +1,7 @@
 from scipy.stats import expon, randint
 from UserEquipment import UserEquipment
-from Content import Content
-
+from SimulationFunctions import *
+from SimulationEntitiesSetup import *
 
 '''SIMULATION PARAMETERS'''
 
@@ -23,28 +23,20 @@ UE_REQUEST_RATE = 0.05
 #mean contact rate between two users (0.05 - 0.25)
 UE_CONTACT_RATE = 0.25
 
+'''DONE SIMULATION PARAMETERS'''
 
 
-#create cache content
-content = [Content(ix=x+1, num_content=NUM_CONTENT,alpha=ALPHA) for x in range(NUM_CONTENT)]
+#list of cachable contents each with zipf priority
+contents = create_content(num_content=NUM_CONTENT,alpha=ALPHA)
 
-#create clusters 
-clusters = [[] for x in range(NUM_D2D_CLUSTERS)]
-
-
-request_size = expon.rvs(scale=UE_REQUEST_RATE,size=NUM_UE)
-#create UEs
-user_equipments = [UserEquipment(request_size[i]) for i in range(NUM_UE)]
+#list of user equipments active in a network
+user_equipments = create_user_equipment(num_ue=NUM_UE,ue_request_rate = UE_REQUEST_RATE, num_d2d_clusters=NUM_D2D_CLUSTERS)
 
 
 
-#Assign users randomly and uniformly to clusters
-cluster_id_generator = randint.rvs(0,NUM_D2D_CLUSTERS,size=NUM_UE)
 
-assert(len(cluster_id_generator) == len(user_equipments))
 
-for i in range(len(cluster_id_generator)):
-	clusters[cluster_id_generator[i]].append(user_equipments[i])
+
 
 
 
