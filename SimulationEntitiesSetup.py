@@ -1,11 +1,11 @@
-from scipy.stats import expon, randint
+from scipy.stats import expon
 from UserEquipment import UserEquipment
 from Content import Content
 
 
 #return a list of cachable content objects
-def create_content(num_content,alpha):
-	content = [Content(ix=x+1, num_content=num_content,alpha=alpha) for x in range(num_content)]
+def create_content(num_content,alpha,average_content_size):
+	content = [Content(ix=x+1, num_content=num_content,alpha=alpha,average_content_size=average_content_size) for x in range(num_content)]
 	return content
 
 #return list of user equipements active connected to a edge server
