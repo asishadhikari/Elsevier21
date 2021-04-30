@@ -32,31 +32,46 @@ priority_to_choose = 0
 def get_available_ue(c):
 	available_ue = []
 	for u in user_equipments:
-		if u.check_avilable(c.size, c.lower)
+		if u.check_avilable(c.size, c.lower):
 			available_ue.append(u)
 	return available_ue
 
 
 
-# Attaches allocable_num_ue to each UE object so that it can be used later 
-def calculate_num_ue():
+#returns the minimum and maximum of priority based on the 
+# priority scheme chosen 
+def min_max_priority():
 	all_priorities = []
 	#get priorities based on scheme chosen
 	for c in contents:
 		all_priorities.append(c.priorities[priority_to_choose])
-	
-	b = max(all_priorities)
 	a = min(all_priorities)
+	b = max(all_priorities)
+	return(a,b)
 
+
+#Sets the lower threshold for all contents
+def set_lower_threshold():
+	a,b = min_max_priority()	
 	#scale priority in a uniform manner based on chosen priority
 	for c in contents:
 		c.lower = (c.priorities[priority_to_choose] - a) //(b-a) *NUM_CONTENT 
 
-		
+
+#Sets the number of ue to cached for each content
+def set_num_ue_caching():
+	a,b = min_max_priority()
+	for c in content:
+		c.num_ue_caching = (c.priorities[priority_to_choose] - a) //(b-a) *NUM_UE 
+
+
+
 
 def allocate_cache_from_ue():
-	#adds allocable_num_ue attribute to each content
-	calculate_num_ue()
+	#Set a lower threshold for each content to be cached
+	set_lower_threshold()
+	calculate_num_ue_caching()
+
 	for c in contents:
 		available_ue = get_available_ue(c)
 		for u in available_ue:

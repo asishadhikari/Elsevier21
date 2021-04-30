@@ -10,9 +10,9 @@ class Content:
 	def __init__(self,ix,num_content,alpha,average_content_size):
 
 		self.zipf_priority = self.calculate_zipf_priority(ix,num_content,alpha) 
-		self.power_priority = math.pow(self.zipf_priority,k)
-		self.log_priority = math.log(self.zipf_priority) 
-		self.blind_priority = NUM_UE//NUM_CONTENT
+		power_priority = math.pow(self.zipf_priority,k)
+		log_priority = math.log(self.zipf_priority) 
+		blind_priority = NUM_UE//NUM_CONTENT
 		self.priorities = [power_priority, log_priority,blind_priority]
 		
 		#index -> lower index is higher priority 
