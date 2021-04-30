@@ -47,4 +47,15 @@ def integrand(t,user_equipments, contact_rate_matrix):
 
 #this implements equation (10) probability of cache hit at d2d level
 def calculate_p_d2d(time,user_equipments,contact_rate_matrix ):
-	return quad(integrand,0,time, args=(user_equipments,contact_rate_matrix))
+	return quad(integrand,0,time, args=(user_equipments,contact_rate_matrix))[0]
+
+
+
+def calculate_cost_ran(clusters,contents,pd2d, normalizing_parameter=1):
+	s = 0
+	for c in clusters:
+		t = 0 
+		for o in contents:
+			t += o.size * (1- pd2d)
+		s += len(c) * t
+	return normalizing_parameter * s

@@ -7,3 +7,4 @@ class UserEquipment:
 		self.cluster = randint.rvs(0,num_d2d_clusters)
 		#exponential distribute request rate
 		self.request_rate = expon.rvs(scale=ue_request_rate)
+

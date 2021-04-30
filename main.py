@@ -49,10 +49,14 @@ contact_rate_matrix = calculate_ue_contact_rate_matrix(user_equipments=user_equi
 clusters = create_clusters(user_equipments, NUM_D2D_CLUSTERS)
 
 
+#probability that content is found within the network
 p_d2d = calculate_p_d2d(CACHE_RETENTION_TIME,user_equipments,contact_rate_matrix)
 
 
 
+
+#cost of using RAN for content access
+c_ran = calculate_cost_ran(clusters,contents,pd2d)
 
 
 
