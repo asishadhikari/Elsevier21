@@ -1,6 +1,7 @@
 from scipy.stats import expon, randint
 from SimulationParameters import *
 from scipy.stats import expon
+from Content import Content
 
 #models the User equipment
 class UserEquipment:
@@ -15,12 +16,15 @@ class UserEquipment:
 		self.rand_num = randint.rvs(0,NUM_CONTENT)
 
 
-	def allocate_cache(self,size):
-		self.storage_space -= size
+	#must always be passed content type
+	def allocate_cache(self,c: Content):
+		if check_available(c):
+			self.storage_space -= c.size
 
-	#check if the lower threshold is valid for this UE and space is available
-	def check_available(self,size, lower):
-		return storage_space - size >= 0 and self.rand_num <=lower
+	#check if size and threshold criteria met. 
+	#must be passed content type
+	def check_available(self,c : Content):
+		return self.storage_space >= c.size and self.rand_num <= c.lower
 
 	def reset_cache(self):
 		self.storage_space = randint.rvs(

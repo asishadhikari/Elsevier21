@@ -23,6 +23,8 @@ class Content:
 
 		#changed later when priority base scheduling
 		self.lower = NUM_CONTENT
+		
+		#this must be integer type
 		self.num_ue_caching = 0
 
 

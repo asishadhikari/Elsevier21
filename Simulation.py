@@ -4,6 +4,8 @@ from PlottingFunctions import *
 from SimulationParameters import *
 
 
+import random
+
 #list of cachable contents each with zipf priority
 contents = create_content(num_content=NUM_CONTENT,alpha=ALPHA,average_content_size=AVERAGE_CONTENT_SIZE)
 #list of user equipments active in a network
@@ -64,15 +66,22 @@ def set_num_ue_caching():
 	for c in content:
 		c.num_ue_caching = (c.priorities[priority_to_choose] - a) //(b-a) *NUM_UE 
 
+def allocate_ue_cache(available_ue,c):
+	random_ues = random.sample(available_ue,c.num_ue_caching)
+	for u in random_ues:
+		u.allocate_cache(c)
+
 
 
 
 def allocate_cache_from_ue():
 	#Set a lower threshold for each content to be cached
 	set_lower_threshold()
-	calculate_num_ue_caching()
+	
+	#based on priority, set the number of ue that must cache each content
+	set_num_ue_caching()
 
 	for c in contents:
+		#available ue to cache c
 		available_ue = get_available_ue(c)
-		for u in available_ue:
-			pass
+		allocate_ue_cache(available_ue,c)
