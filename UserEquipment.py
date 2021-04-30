@@ -1,10 +1,40 @@
 from scipy.stats import expon, randint
+from SimulationParameters import *
+from scipy.stats import expon
 
 #models the User equipment
 class UserEquipment:
 	def __init__(self,ue_request_rate,num_d2d_clusters):
-		#uniform distribute clusters
+		#uniform distribute clusters 
 		self.cluster = randint.rvs(0,num_d2d_clusters)
 		#exponential distribute request rate
 		self.request_rate = expon.rvs(scale=ue_request_rate)
+		self.storage_space = randint.rvs(
+			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE))
+		#Signalling 
+		self.rand_num = randint.rvs(0,NUM_CONTENT)
 
+
+	def allocate_cache(self,size):
+		self.storage_space -= size
+
+	#check if the lower threshold is valid for this UE and space is available
+	def check_available(self,size, lower):
+		return storage_space - size >= 0 and self.rand_num <=lower
+
+	def reset_cache(self):
+		self.storage_space = randint.rvs(
+			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE))
+
+
+	def generate_request(self):
+		s = 0
+		for x in range(1,NUM_CONTENT+1):
+			s = s +  ((1/x)**ALPHA)
+		return round( (1/(ix **alpha)) / s )
+
+	def calculate_zipf_priority(self,ix, num_content,alpha):
+		s = 0
+		for x in range(1,num_content+1):
+			s = s +  ((1/x)**alpha)
+		return (1/(ix **alpha)) / s

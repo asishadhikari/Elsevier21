@@ -1,25 +1,9 @@
 import numpy as np
-import plotly.express as px
 import pandas as pd
 from math import e
 from scipy.stats import expon, randint
 import scipy.integrate as integrate
 from scipy.integrate import quad
-
-
-def write_csv_alpha_vs_priority(contents):
-	data = []
-	for c in contents:
-		data.append(c.priority)
-	data = np.asarray(data)
-	np.savetxt("priorityVariation.csv",data)
-
-
-def plot_with_plotly():
-	df = pd.read_csv('priorityVariation.csv')
-	fig = px.line(df)
-	fig.show()
-
 
 #return uxu matrix of the 
 def calculate_ue_contact_rate_matrix(user_equipments,ue_contact_rate):
