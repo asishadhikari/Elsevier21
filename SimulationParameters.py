@@ -1,8 +1,13 @@
 '''SIMULATION PARAMETERS'''
+#number of caching rounds to run simulation
+NUM_ROUNDS = 10
 
 #Object priority profile (5)  #1.1 gives nice graph
 ALPHA = 0.8
 
+
+#0 => power_priority 1=>log_priority, 2=> blind_priority
+PRIORITY_TO_CHOOSE = 2
 
 #number of UEs in the network (100-300)
 NUM_UE = 100
@@ -30,8 +35,8 @@ AVERAGE_UE_CACHE_SPACE = AVERAGE_CONTENT_SIZE *10
 #used to map actual storage space as uniform distribution
 CACHE_DIFFERENCE_RANGE = 0.2
 
-
-
 UPPER_THRESHOLD = NUM_CONTENT
+
+
 
 '''DONE SIMULATION PARAMETERS'''

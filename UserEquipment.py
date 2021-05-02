@@ -5,7 +5,7 @@ from Content import Content
 
 #models the User equipment
 class UserEquipment:
-	def __init__(self,ue_request_rate,num_d2d_clusters):
+	def __init__(self,ue_request_rate=UE_REQUEST_RATE,num_d2d_clusters=NUM_D2D_CLUSTERS):
 		#uniform distribute clusters 
 		self.cluster = randint.rvs(0,num_d2d_clusters)
 		#exponential distribute request rate
@@ -42,3 +42,5 @@ class UserEquipment:
 		for x in range(1,num_content+1):
 			s = s +  ((1/x)**alpha)
 		return (1/(ix **alpha)) / s
+
+
