@@ -1,4 +1,5 @@
 from scipy.stats import expon, randint
+from numpy.random import uniform
 from SimulationParameters import *
 from scipy.stats import expon
 from Content import Content
@@ -13,7 +14,9 @@ class UserEquipment:
 		self.storage_space = randint.rvs(
 			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE))
 		#Signalling 
-		self.rand_num = randint.rvs(0,NUM_CONTENT)
+
+	def signal_rand_num_to_server(self,lower,upper):
+		self.rand_num = uniform(lower,upper)
 
 
 	#must always be passed content type

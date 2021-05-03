@@ -11,7 +11,7 @@ class Content:
 
 		self.zipf_priority = self.calculate_zipf_priority(ix,num_content,alpha) 
 		power_priority = math.pow(self.zipf_priority,k)
-		log_priority = math.log(self.zipf_priority) 
+		log_priority = 1- math.log(self.zipf_priority) 
 		blind_priority = NUM_UE//NUM_CONTENT
 		self.priorities = [power_priority, log_priority,blind_priority]
 		

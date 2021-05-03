@@ -2,7 +2,7 @@ from SimulationEntitiesSetup import *
 from SimulationFunctions import *
 from PlottingFunctions import *
 from SimulationParameters import *
-
+from GeneticAlgorithm import *
 
 import random
 
@@ -38,14 +38,22 @@ class EdgeServer:
 
 
 	#Allocate cache based on priority selected for all Contents
-	def allocate_cache_from_ue(self):
+	def allocate_cache_from_ue(self, priority_to_choose=PRIORITY_TO_CHOOSE):
 		contents = self.contents
-		a,b = min_max_priority(contents)
+		lower,upper = min_max_priority(contents,priority_to_choose)
+
+		#ask UEs to set their priority threshold based on priorities observed
+		for u in self.user_equipments:
+			u.signal_rand_num_to_server(lower,upper)	
+
+
+		
+
 		#set lower threshold for caching and determine number of ues that will cache 
 		#	each content
 		for c in contents:
-			c.num_ue_caching = (c.priorities[PRIORITY_TO_CHOOSE] - a) //(b-a) *NUM_UE 
-			c.lower = (c.priorities[PRIORITY_TO_CHOOSE] - a) //(b-a) *NUM_CONTENT 
+			c.num_ue_caching = (c.priorities[priority_to_choose] - lower) //(upper-lower) *NUM_UE 
+			c.lower = (c.priorities[priority_to_choose] - lower) //(upper-lower) *NUM_CONTENT 
 			#based on decisions made, get list of ALL available ues that will cache
 			available_ue = self.get_available_ue(c)
 			#select randomly the number of UEs chosen to cache from all avilable UEs
@@ -57,17 +65,5 @@ class EdgeServer:
 
 
 
-'''helper functions unrelated to EdgeServer'''
-
-#returns the minimum and maximum of priority based on the 
-# priority scheme chosen 
-def min_max_priority(contents):
-	all_priorities = []
-	#get priorities based on scheme chosen
-	for c in contents:
-		all_priorities.append(c.priorities[PRIORITY_TO_CHOOSE])
-	a = min(all_priorities)
-	b = max(all_priorities)
-	return(a,b)
 
  

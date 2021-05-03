@@ -47,3 +47,22 @@ def calculate_cost_ran(clusters,contents,pd2d, normalizing_parameter=1):
 			t += o.size * (1- pd2d)
 		s += len(c) * t
 	return normalizing_parameter * s
+
+
+
+#returns the minimum and maximum of priority based on the 
+# priority scheme chosen
+'''helper function unrelated to EdgeServer'''
+def min_max_priority(contents, priority_to_choose):
+	all_priorities = []
+	#get priorities based on scheme chosen
+	for c in contents:
+		all_priorities.append(c.priorities[priority_to_choose])
+	a = min(all_priorities)
+	b = max(all_priorities)
+	return(a,b)
+
+
+
+def select_users_to_cache():
+	
