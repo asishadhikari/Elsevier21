@@ -14,6 +14,7 @@ class UserEquipment:
 		self.storage_space = randint.rvs(
 			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE))
 		#Signalling 
+		
 
 	def signal_rand_num_to_server(self,lower,upper):
 		self.rand_num = uniform(lower,upper)

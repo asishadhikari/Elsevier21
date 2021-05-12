@@ -40,13 +40,14 @@ class EdgeServer:
 	#Allocate cache based on priority selected for all Contents
 	def allocate_cache_from_ue(self, priority_to_choose=PRIORITY_TO_CHOOSE):
 		contents = self.contents
+		#lowest and highest priority from contents
 		lower,upper = min_max_priority(contents,priority_to_choose)
 
 		#ask UEs to set their priority threshold based on priorities observed
 		for u in self.user_equipments:
 			u.signal_rand_num_to_server(lower,upper)	
 
-
+		
 		
 
 		#set lower threshold for caching and determine number of ues that will cache 
