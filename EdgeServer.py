@@ -48,7 +48,9 @@ class EdgeServer:
 			u.signal_rand_num_to_server(lower,upper)	
 
 		
-		
+		caching_decisions = genetic_algo_decisions(self)
+
+'''		
 
 		#set lower threshold for caching and determine number of ues that will cache 
 		#	each content
@@ -62,9 +64,5 @@ class EdgeServer:
 			#allocate cache stroage from c.num_ue_caching UEs
 			for u in random_ues:
 				u.allocate_cache(c)
-
-
-
-
-
- 
+			
+'''

@@ -2,33 +2,48 @@ from PYGAD import pygad
 from SimulationParameters import *
 
 
-#prepare parameters for pygad
-fitness_function = fitness_function
-num_generations = 50
-num_parents_mating = 4
-
-sol_per_pop = 8
-num_genes = len(function_inputs)
-
-init_range_low = -2
-init_range_high = 5
-
-parent_selection_type = "sss"
-keep_parents = 1
-
-crossover_type = "single_point"
-mutation_type = "random"
-mutation_percent_genes = 10
+#prepare parameters for GA instance
 
 
 
 
-def fitness_function(solution, solution_ix):
-	pass
+
+contents = []
+user_equipments = []
+clusters = []
 
 
 
-#create GA instance
+
+''' Check the Preparing the ``fitness_func`` Parameter section 
+for information about creating such a function.'''
+def fitness_function(all_ue_caching_decisions, solution_ix):
+	#if not all cached in a cluster, fitness 0
+	# if size limit exceeded 0
+	#else fitness sum of priority
+
+	fail = True
+
+	for ue in all_ue_caching_decisions:
+		for content in ue:
+
+	return 0 if fail else fitness 
+
+
+def genetic_algo_decisions(edgeserver):
+	return initial_ga_setup(edgeserver)
+
+
+#pass in edgeserver instance
+def initial_ga_setup(edgeserver):
+	contents = edgeserver.contents
+	user_equipments = edgeserver.user_equipments
+	clusters = edgeserver.clusters
+
+
+
+
+#create GA instance 
 
 
 
