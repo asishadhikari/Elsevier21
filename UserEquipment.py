@@ -12,9 +12,11 @@ class UserEquipment:
 		#exponential distribute request rate
 		self.request_rate = expon.rvs(scale=ue_request_rate)
 		self.storage_space = randint.rvs(
-			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE))
+			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),
+			AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE)
+			)
 		#Signalling 
-		
+
 
 	def signal_rand_num_to_server(self,lower,upper):
 		self.rand_num = uniform(lower,upper)
@@ -28,7 +30,7 @@ class UserEquipment:
 	#check if size and threshold criteria met. 
 	#must be passed content type
 	def check_available(self,c : Content):
-		return self.storage_space >= c.size and self.rand_num <= c.lower
+		return self.storage_space >= c.size and self.rand_num <= c.priorities[PRIORITY_TO_CHOOSE]
 
 	def reset_cache(self):
 		self.storage_space = randint.rvs(

@@ -46,9 +46,8 @@ class EdgeServer:
 		#ask UEs to set their priority threshold based on priorities observed
 		for u in self.user_equipments:
 			u.signal_rand_num_to_server(lower,upper)	
-
 		
-		caching_decisions = genetic_algo_decisions(self)
+		self.GA = genetic_algo_decisions(self)
 
 '''		
 

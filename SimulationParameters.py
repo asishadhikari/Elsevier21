@@ -31,7 +31,7 @@ AVERAGE_CONTENT_SIZE = 0.2
 CACHE_RETENTION_TIME = 500
 
 #Average cache space avilable at a UE (for uniform distribution)
-AVERAGE_UE_CACHE_SPACE = AVERAGE_CONTENT_SIZE *10
+AVERAGE_UE_CACHE_SPACE = AVERAGE_CONTENT_SIZE *100
 #used to map actual storage space as uniform distribution
 CACHE_DIFFERENCE_RANGE = 0.2
 

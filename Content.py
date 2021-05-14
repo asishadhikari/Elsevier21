@@ -21,8 +21,9 @@ class Content:
 		#content size
 		self.size= expon.rvs(average_content_size)
 
+		#Not needed and taken out 
 		#changed later when priority base scheduling
-		self.lower = NUM_CONTENT
+		#self.lower = NUM_CONTENT
 		
 		#this must be integer type
 		self.num_ue_caching = 0
