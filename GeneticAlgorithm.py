@@ -70,6 +70,8 @@ def initial_ga_setup(edgeserver):
 					if ue_cache_used > user_equipments[ue_ix].storage_space:
 						return 0
 
+
+					#????
 					#  # ue asked to cache but does not want to cache return 0
 					# if not user_equipments[ue_ix].check_available(contents[content_ix]):
 					# 	return 0
