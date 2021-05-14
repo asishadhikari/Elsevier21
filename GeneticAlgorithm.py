@@ -14,9 +14,13 @@ clusters = []
 ''' Check the Preparing the ``fitness_func`` Parameter section 
 for information about creating such a function.'''
 def fitness_function(solution, solution_ix):
-	#if not all cached in a cluster, fitness 0
-	# if size limit exceeded 0
-	#else fitness sum of priority
+	'''ToDo:
+	[X]   if not all cached in a cluster, fitness 0
+	[X] if a user not ready to cache a content and asked, fitness 0 
+	[X]   if size limit exceeded 0
+	[X]  else fitness sum of priority
+	
+	'''
 
 	#fitness criteria dependent on cluster, and ue cache space
 	fail = False
@@ -28,16 +32,46 @@ def fitness_function(solution, solution_ix):
 	assert len(ue_caching_decisions) == NUM_UE
 	assert len(ue_caching_decisions[0])== NUM_CONTENT
 
-	
+
+	#2d array to represent contents being cached across different clusters. Value 0 or 1 (cached)
+	cluster_caching_decisions = [[0 for x in range(NUM_CONTENT)] for c in range(NUM_D2D_CLUSTERS)]
 
 
+	#used to track net priority based gain
+	priority_score = 0
 
+	#check if ue not ready to cache a content
+	for ue_ix in range(NUM_UE):
+		ue_cached_used = 0
+		for content_ix in range(NUM_CONTENT):
+			#content_ix is cached at ue_ix 
+			if ue_caching_decisions[ue_ix][content_ix]:
+				#update the cache storage used at ue for the decision
+				ue_cached_used += contents[content_ix].size
+				
+				#update priority score
+				priority_score += contents[content_ix].priorities[PRIORITY_TO_CHOOSE]
 
+				#if more cache space asked for user than available return 0
+				if ue_cached_used > user_equipments[ue_ix].storage_space:
+					return 0
 
+				#ue asked to cache but does not want to cache return 0
+				if not user_equipments[ue_ix].check_available(contents[content_ix]):
+					return 0
 
+				ue_cluster = user_equipments[ue_ix].cluster
+				#indicate in the appropriate cluster index that the service has been cached
+				cluster_caching_decisions[ue_cluster][content_ix] = 1
 
+	#fitness is 0 if a content is not cached in all clusters
+	cluster_caching_decisions = cluster_caching_decisions.flatten()
+	for d in cluster_caching_decisions:
+		if not d:
+			return 0
 
-	return 0 if fail else fitness 
+	return priority_score
+
 
 
 def genetic_algo_decisions(edgeserver):
@@ -51,12 +85,13 @@ def initial_ga_setup(edgeserver):
 	clusters = edgeserver.clusters
 	edgeserver = edgeserver
 
-	#GA parameters
-
-	num_generations=100
-	num_parents_mating=10
-	fitness_func=fitness_function
-	sol_per_pop=20
+	
+	#create ga_instance
+	ga_instance = pygad.GA(
+		num_generations=100,
+		num_parents_mating=10,
+		fitness_func=fitness_function,
+		sol_per_pop=20
 	num_genes=len(user_equipments)* len(contents)
 	gene_type = int
 	init_range_low=0
@@ -72,6 +107,8 @@ def initial_ga_setup(edgeserver):
 	random_mutation_max_val=1.0
 	save_best_solutions=True
 	gene_space = [0,1]
+
+
 
 
 
