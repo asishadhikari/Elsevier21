@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
+
+
 from SimulationParameters import *
 from matplotlib import pyplot as plt
 
@@ -11,18 +13,27 @@ from matplotlib import pyplot as plt
 #plot the different priority graphs
 def plot_priority_vs_alpha(alpha,contents):
 	power_priority = []
-	log_priotity = []
+	log_priority = []
 	blind_priority = []
 	content_ix = [x for x in range(NUM_CONTENT)]
 	for c in contents:
 		p = c.priorities
 		power_priority.append(p[0])
-		log_priotity.append(p[1])
+		log_priority.append(p[1])
 		blind_priority.append(p[2])
+
+	# np.savetxt("./csv/priorities.csv",power_priority,delimiter=',')
+	# np.savetxt("./csv/priorities.csv",log_priority,delimiter=',')
+	# np.savetxt("./csv/priorities.csv",blind_priority,delimiter=',')
+	
+
+	np.savetxt("./csv/priorities.csv",(power_priority,log_priority,blind_priority),delimiter=',')
+	
+
 
 
 	plt.plot(power_priority, label='power priority',c='r')
-	plt.plot(log_priotity,label = 'log_priority',c= 'b')
+	plt.plot(log_priority,label = 'log_priority',c= 'b')
 	plt.plot(blind_priority,label= 'same priority')
 	plt.xlabel("Content index")
 	plt.ylabel("Priority")
