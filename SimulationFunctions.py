@@ -39,7 +39,7 @@ def calculate_p_d2d(user_equipments,contact_rate_matrix, time=CACHE_RETENTION_TI
 
 
 
-def calculate_cost_ran(clusters,contents,pd2d, normalizing_parameter=1):
+def calculate_cost_ran(clusters,contents,pd2d, normalizing_parameter=RAN_COST_NORMALIZING_PARAMETER):
 	s = 0
 	for c in clusters:
 		t = 0 
