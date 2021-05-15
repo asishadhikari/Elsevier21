@@ -1,6 +1,44 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
+from SimulationParameters import *
+from matplotlib import pyplot as plt
+
+
+'''tutorial : https://howtothink.readthedocs.io/en/latest/PvL_H.html
+	
+'''
+#plot the different priority graphs
+def plot_priority_vs_alpha(alpha,contents):
+	power_priority = []
+	log_priotity = []
+	blind_priority = []
+	content_ix = [x for x in range(NUM_CONTENT)]
+	for c in contents:
+		p = c.priorities
+		power_priority.append(p[0])
+		log_priotity.append(p[1])
+		blind_priority.append(p[2])
+
+
+	plt.plot(power_priority, label='power priority',c='r')
+	plt.plot(log_priotity,label = 'log_priority',c= 'b')
+	plt.plot(blind_priority,label= 'same priority')
+	plt.xlabel("Content index")
+	plt.ylabel("Priority")
+	plt.legend()
+
+	plt.show()
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -37,9 +75,6 @@ def plot_with_plotly():
 	df = pd.read_csv('priorityVariation.csv')
 	fig = px.line(df)
 	fig.show()
-
-
-
 
 
 

@@ -3,16 +3,6 @@ from PYGAD import pygad
 from SimulationParameters import *
 
 
-
-
-#Global variables to be used by fitness function
-# contents = []
-# user_equipments = []
-# clusters = []
-
-
-
-
 def genetic_algo_decisions(edgeserver):
 	return initial_ga_setup(edgeserver)
 
@@ -73,8 +63,8 @@ def initial_ga_setup(edgeserver):
 
 					#????
 					#  # ue asked to cache but does not want to cache return 0
-					# if not user_equipments[ue_ix].check_available(contents[content_ix]):
-					# 	return 0
+					if not user_equipments[ue_ix].check_available(contents[content_ix]):
+						return 0	
 
 					ue_cluster = user_equipments[ue_ix].cluster
 					#indicate in the appropriate cluster index that the service has been cached
@@ -86,25 +76,39 @@ def initial_ga_setup(edgeserver):
 			if not d:
 				return 0
 
-		return priority_score
+		return 1/priority_score
 
+
+
+
+	'''unused GA params:
+		crossover_probability
+		gene_type
+		gene_space = [0,1]
+		save_best_solutions
+		mutation_percent_genes
+		mutation_num_genes
+		random_mutation_max_val
+		init_range_low=0,
+		init_range_high=1,
+		
+
+	'''
 
 
 	#create ga_instance
 	ga_instance = pygad.GA(
-		num_generations=100,
+		num_generations=500,
 		gene_type=int,
 		gene_space=[0,1],
 		num_parents_mating=10,
 		fitness_func=fitness_function,
-		sol_per_pop=20,
+		sol_per_pop=50,
 		num_genes=len(user_equipments)* len(contents),
-		init_range_low=0,
-		init_range_high=1,
 		mutation_probability = 0.5,
 		mutation_by_replacement=True,
 		mutation_type="random", 
-		parent_selection_type="tournament",
+		parent_selection_type="rank",
 		keep_parents=-1,
 		crossover_type="single_point",
 		
@@ -118,14 +122,5 @@ def initial_ga_setup(edgeserver):
 
 
 
-	'''unused GA params:
-		crossover_probability
-		gene_type
-		gene_space = [0,1]
-		save_best_solutions
-		mutation_percent_genes
-		mutation_num_genes
-		random_mutation_max_val
 
-
-	'''
+#Good result params:

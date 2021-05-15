@@ -7,7 +7,7 @@ ALPHA = 0.8
 
 
 #0 => power_priority 1=>log_priority, 2=> blind_priority
-PRIORITY_TO_CHOOSE = 2
+PRIORITY_TO_CHOOSE = 1
 
 #number of UEs in the network (100-300)
 NUM_UE = 100
