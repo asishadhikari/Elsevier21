@@ -62,7 +62,7 @@ def initial_ga_setup(edgeserver):
 
 
 					#????
-					#  # ue asked to cache but does not want to cache return 0
+					# #  # ue asked to cache but does not want to cache return 0
 					if not user_equipments[ue_ix].check_available(contents[content_ix]):
 						return 0	
 
@@ -82,35 +82,76 @@ def initial_ga_setup(edgeserver):
 
 
 	'''unused GA params:
-		crossover_probability
+		initial_population
 		gene_type
 		gene_space = [0,1]
 		save_best_solutions
 		mutation_percent_genes
 		mutation_num_genes
+		random_mutation_min_val
 		random_mutation_max_val
 		init_range_low=0,
 		init_range_high=1,
+		K_tournament,
+
+		delay_after_gen=0.0:
+		suppress_warnings=False
+
+
+
 		
 
+	parent_selection_type="sss": The parent selection type. Supported types are 
+		sss (for steady-state selection), 
+		rws (for roulette wheel selection), 
+		sus (for stochastic universal selection), 
+		rank (for rank selection), 
+		random (for random selection), 
+		and tournament (for tournament selection).
+
+	crossover_type="single_point"
+		supported:
+			two_points,  uniform,  scattered,   None (no crossover)
+
+	???not clear if some of the second params in callback are list or single
+	callback functions:
+		on_start = f(ga_instance)  called only once at start before evolution
+		on_fitness = f(ga_instance, list_fitness_values) 
+				-> called after canculating fitness values of all soln
+		on_parents= f(ga_instance, list_selected_parents)
+				-> called after selecting parents that mate
+		on_crossover = f(ga_instance, list_offspring_from_crossover)
+				-> called after crossover is applied to a generation
+		on_mutation = f(ga_instance, offspring_generated_after_mutation)
+				-> called each time mutation operation is applied
+		on_generation = f(ga_instance)
+				-> called after each generation. 
+				-> if returns stop, GA.run() stops at cur generation
+
+		@deprecated : callback_generation
+		callback_generation=f(ga_instance)
+				-> called after each generation
+				-> if returns stop, GA.run() stops at current generation
 	'''
 
 
 	#create ga_instance
 	ga_instance = pygad.GA(
 		num_generations=100,
+		sol_per_pop=20,
+		num_parents_mating=10,
+		keep_parents=0,
+		parent_selection_type="sss",
+		crossover_probability = 0.9,
+		crossover_type="single_point",
 		gene_type=int,
 		gene_space=[0,1],
-		num_parents_mating=10,
 		fitness_func=fitness_function,
-		sol_per_pop=50,
 		num_genes=len(user_equipments)* len(contents),
 		mutation_probability = 0.5,
 		mutation_by_replacement=True,
 		mutation_type="random", 
-		parent_selection_type="sss",
-		keep_parents=-1,
-		crossover_type="single_point",
+		allow_duplicate_genes=False
 		)
 
 	ga_instance.run()
