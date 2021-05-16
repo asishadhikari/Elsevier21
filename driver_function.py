@@ -14,7 +14,8 @@ clusters = e.clusters
 contact_rate_matrix = calculate_ue_contact_rate_matrix(user_equipments=user_equipments,ue_contact_rate=UE_CONTACT_RATE)
 #probability that content is found within the network ?????
 
-p_d2d = integrand(1,user_equipments, contact_rate_matrix)
+#p_d2d = integrand(1,user_equipments, contact_rate_matrix)
+p_d2d = calculate_p_d2d(user_equipments,contact_rate_matrix )
 assert(p_d2d>=0 and p_d2d <=1)
 
 

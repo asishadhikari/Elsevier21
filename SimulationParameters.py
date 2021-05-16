@@ -4,9 +4,9 @@ NUM_ROUNDS = 10
 
 
 #number of UEs in the network (100-300)
-NUM_UE = 350
+NUM_UE = 50
 #Object priority profile (5)  #1.1 gives nice graph
-ALPHA = 4.5
+ALPHA = 10.5
 
 
 #0 => power_priority 1=>log_priority, 2=> blind_priority
@@ -24,13 +24,13 @@ NUM_D2D_CLUSTERS = 4
 UE_REQUEST_RATE = 0.05
 
 #mean contact rate between two users (0.05 - 0.25)
-UE_CONTACT_RATE = 0.25
+UE_CONTACT_RATE = 0.2
 
 AVERAGE_CONTENT_SIZE = 0.2
 
 
 #500 ms
-CACHE_RETENTION_TIME = 500
+CACHE_RETENTION_TIME = 50
 
 #Average cache space avilable at a UE (for uniform distribution)
 AVERAGE_UE_CACHE_SPACE = AVERAGE_CONTENT_SIZE *100

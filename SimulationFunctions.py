@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from math import e
+from math import e , pow
 from scipy.stats import expon, randint,uniform
 import scipy.integrate as integrate
 from scipy.integrate import quad
@@ -31,7 +31,9 @@ def integrand(t,user_equipments, contact_rate_matrix):
 	for x in range(len(user_equipments)):
 		for y in range(len(user_equipments)):
 			lij = contact_rate_matrix[x][y]
-			s += lij / (e ** (user_equipments[x].request_rate + sum(contact_rate_matrix[x])) )* t 
+			#s += lij / (e ** ((user_equipments[x].request_rate + sum(contact_rate_matrix[x])) * t))
+			if lij:
+				s += pow(e, -((1/user_equipments[x].request_rate + 1/sum(contact_rate_matrix[x])) * t)) /lij
 	return s
 
 
