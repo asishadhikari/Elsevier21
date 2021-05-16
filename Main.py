@@ -39,7 +39,6 @@ csv_ran_cost_vs_alpha(ALPHA, user_equipments,c_ran)
 '''
 
 	#3. [X] Plot GA convergence
-'''
 
 #lowest and highest priority from contents
 lower,upper = min_max_priority(contents,PRIORITY_TO_CHOOSE)
@@ -60,7 +59,7 @@ best_solutions_fitness = np.asarray(best_solutions_fitness)
 data = best_solutions_fitness/best_solutions_fitness.max()
 np.savetxt("fitness%s_normalized.csv"%PRIORITY_TO_CHOOSE,data)
 
-'''
+
 
 
 

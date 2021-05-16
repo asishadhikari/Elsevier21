@@ -4,8 +4,8 @@ NUM_ROUNDS = 10
 
 
 #number of UEs in the network (100-300)
-NUM_UE = 100
-#Object priority profile (5)  #1.1 gives nice graph
+NUM_UE = 200
+#Object priority profile (5)  
 ALPHA =1.5
 
 
