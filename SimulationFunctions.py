@@ -48,6 +48,7 @@ def calculate_cost_ran(clusters,contents,pd2d, normalizing_parameter=RAN_COST_NO
 	for c in clusters:
 		t = 0 
 		for o in contents:
+			#time cost wrt to 
 			t += o.size * (1- pd2d)
 		s += len(c) * t
 	return normalizing_parameter * s
