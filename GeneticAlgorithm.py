@@ -25,9 +25,6 @@ def initial_ga_setup(edgeserver):
 		
 		'''
 
-		#fitness criteria dependent on cluster, and ue cache space
-		fail = False
-
 		#convert the 1D solution vector to 2D so that we can easily use
 		ue_caching_decisions = np.reshape(solution, (NUM_UE,NUM_CONTENT), 'c')
 
@@ -57,14 +54,14 @@ def initial_ga_setup(edgeserver):
 					priority_score += contents[content_ix].priorities[PRIORITY_TO_CHOOSE]
 
 					#if more cache space asked for user than available return 0
-					if ue_cache_used > user_equipments[ue_ix].storage_space:
-						return 0
+					# if ue_cache_used > user_equipments[ue_ix].storage_space:
+					# 	return 0
 
 
 					#????
 					# #  # ue asked to cache but does not want to cache return 0
-					if not user_equipments[ue_ix].check_available(contents[content_ix]):
-						return 0	
+					# if not user_equipments[ue_ix].check_available(contents[content_ix]):
+					# 	return 0	
 
 					ue_cluster = user_equipments[ue_ix].cluster
 					#indicate in the appropriate cluster index that the service has been cached
@@ -93,10 +90,12 @@ def initial_ga_setup(edgeserver):
 		init_range_low=0,
 		init_range_high=1,
 		K_tournament,
-
+		allow_duplicate_genes=False,
 		delay_after_gen=0.0:
-		suppress_warnings=False
-
+		num_parents_mating=10,
+		keep_parents=1,
+		K_tournament=5,
+	
 
 
 		
@@ -137,21 +136,20 @@ def initial_ga_setup(edgeserver):
 
 	#create ga_instance
 	ga_instance = pygad.GA(
-		num_generations=100,
-		sol_per_pop=20,
+		num_generations=500,
+		sol_per_pop=100,
 		num_parents_mating=10,
-		keep_parents=0,
 		parent_selection_type="sss",
-		crossover_probability = 0.9,
-		crossover_type="single_point",
+		crossover_probability = 0.95,
+		crossover_type="uniform",
 		gene_type=int,
 		gene_space=[0,1],
 		fitness_func=fitness_function,
 		num_genes=len(user_equipments)* len(contents),
-		mutation_probability = 0.5,
+		mutation_probability = 0.1,
 		mutation_by_replacement=True,
 		mutation_type="random", 
-		allow_duplicate_genes=False
+		suppress_warnings=False
 		)
 
 	ga_instance.run()
@@ -159,8 +157,7 @@ def initial_ga_setup(edgeserver):
 
 	return ga_instance
 		
+'''
+USER READINESS COMMENTED OUT
 
-
-
-
-#Good result params:
+'''

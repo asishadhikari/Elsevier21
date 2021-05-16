@@ -7,11 +7,12 @@ from scipy.integrate import quad
 
 #EdgeServer variable for simulation
 edgeserver = EdgeServer()
+
 user_equipments = edgeserver.user_equipments
 contents = edgeserver.contents
 clusters = edgeserver.clusters
-
 contact_rate_matrix = calculate_ue_contact_rate_matrix(user_equipments=user_equipments,ue_contact_rate=UE_CONTACT_RATE)
+
 
 '''Todo
 	1. [X] Plot priority vs content graph
@@ -35,7 +36,21 @@ csv_ran_cost_vs_alpha(ALPHA, user_equipments,c_ran)
 '''
 
 	#3. [ ] Plot GA convergence
+
+#lowest and highest priority from contents
+lower,upper = min_max_priority(contents,PRIORITY_TO_CHOOSE)
+
+#ask UEs to set their priority threshold based on priorities observed
+for u in user_equipments:
+	u.signal_rand_num_to_server(lower,upper)
+print(edgeserver.user_equipments[4].rand_num)
+
 ga_instance = edgeserver.allocate_cache_from_ue_and_return_ga()
+
+
+#best_solution_fitness = ga_instance.best_solution_fitness
+
+
 
 
 

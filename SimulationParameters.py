@@ -4,9 +4,9 @@ NUM_ROUNDS = 10
 
 
 #number of UEs in the network (100-300)
-NUM_UE = 500
+NUM_UE = 100
 #Object priority profile (5)  #1.1 gives nice graph
-ALPHA =10.5
+ALPHA =1.5
 
 
 #0 => power_priority 1=>log_priority, 2=> blind_priority
