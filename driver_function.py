@@ -15,7 +15,11 @@ contact_rate_matrix = calculate_ue_contact_rate_matrix(user_equipments=user_equi
 #probability that content is found within the network ?????
 
 #p_d2d = integrand(1,user_equipments, contact_rate_matrix)
-p_d2d = calculate_p_d2d(user_equipments,contact_rate_matrix )
+#p_d2d = calculate_p_d2d(user_equipments,contact_rate_matrix )
+
+
+p_d2d = novel_calculate_p_d2d(contents)
+
 assert(p_d2d>=0 and p_d2d <=1)
 
 
@@ -35,7 +39,7 @@ assert(p_d2d>=0 and p_d2d <=1)
 #cost of using RAN for content access
 c_ran = calculate_cost_ran(clusters,contents,p_d2d)
 csv_ran_cost_vs_alpha(ALPHA, user_equipments,c_ran)
-
+print(p_d2d)
 
 
 

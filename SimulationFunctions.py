@@ -44,6 +44,23 @@ def calculate_p_d2d(user_equipments,contact_rate_matrix, time=CACHE_RETENTION_TI
 	return quad(integrand,1,time, args=(user_equipments,contact_rate_matrix))[0]
 
 
+#start writing new pd2d function
+def novel_calculate_p_d2d(contents):
+	s = 0
+	t1=t2=0
+	for j in range(1,len(contents)+1):
+		t1 += pow(j,-1*ALPHA)
+		t1_l_sum = 0
+		t2_l_sum = 0
+		for i in range(1,len(contents)+1):
+			t1_l_sum += (pow(i,-1*ALPHA))
+			t2_l_sum += (pow(i,-1*BETA*ALPHA))
+		t1 = t1/t1_l_sum
+		t2 = pow(j,-1*ALPHA*BETA)
+		t2 = t2/t2_l_sum
+		s += t1 * t2
+	assert(t1!=t2)
+	return s
 
 def calculate_cost_ran(clusters,contents,pd2d, normalizing_parameter=RAN_COST_NORMALIZING_PARAMETER):
 	s = 0

@@ -4,9 +4,9 @@ NUM_ROUNDS = 10
 
 
 #number of UEs in the network (100-300)
-NUM_UE = 50
+NUM_UE = 500
 #Object priority profile (5)  #1.1 gives nice graph
-ALPHA = 10.5
+ALPHA =10.5
 
 
 #0 => power_priority 1=>log_priority, 2=> blind_priority
@@ -36,6 +36,11 @@ CACHE_RETENTION_TIME = 50
 AVERAGE_UE_CACHE_SPACE = AVERAGE_CONTENT_SIZE *100
 #used to map actual storage space as uniform distribution
 CACHE_DIFFERENCE_RANGE = 0.2
+
+
+	
+BETA = 3
+
 
 UPPER_THRESHOLD = NUM_CONTENT
 
