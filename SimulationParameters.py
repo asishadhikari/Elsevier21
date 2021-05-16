@@ -2,15 +2,17 @@
 #number of caching rounds to run simulation
 NUM_ROUNDS = 10
 
+
+#number of UEs in the network (100-300)
+NUM_UE = 400
 #Object priority profile (5)  #1.1 gives nice graph
-ALPHA = 0.8
+ALPHA = 4.5
 
 
 #0 => power_priority 1=>log_priority, 2=> blind_priority
 PRIORITY_TO_CHOOSE = 1
 
-#number of UEs in the network (100-300)
-NUM_UE = 100
+
 
 #number of contents (20)
 NUM_CONTENT =  20

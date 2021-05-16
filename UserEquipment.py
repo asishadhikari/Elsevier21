@@ -10,7 +10,9 @@ class UserEquipment:
 		#uniform distribute clusters 
 		self.cluster = randint.rvs(0,num_d2d_clusters)
 		#exponential distribute request rate
-		self.request_rate = expon.rvs(scale=ue_request_rate)
+
+		#self.request_rate = expon.rvs(scale=ue_request_rate)   ???
+		self.request_rate = ue_request_rate
 		self.storage_space = randint.rvs(
 			AVERAGE_UE_CACHE_SPACE*(1- CACHE_DIFFERENCE_RANGE),
 			AVERAGE_UE_CACHE_SPACE+(1 + CACHE_DIFFERENCE_RANGE)

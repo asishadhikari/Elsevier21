@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from math import e
-from scipy.stats import expon, randint
+from scipy.stats import expon, randint,uniform
 import scipy.integrate as integrate
 from scipy.integrate import quad
 
@@ -12,7 +12,8 @@ def calculate_ue_contact_rate_matrix(user_equipments,ue_contact_rate=UE_CONTACT_
 	for x in range(len(user_equipments)):
 		t = []
 		for y in range(len(user_equipments)):
-			v = 0 if user_equipments[x].cluster != user_equipments[y].cluster else expon.rvs(scale=ue_contact_rate) 
+			#v = 0 if user_equipments[x].cluster != user_equipments[y].cluster else expon.rvs(scale=ue_contact_rate) 
+			v = 0 if user_equipments[x].cluster != user_equipments[y].cluster else uniform.rvs(UE_CONTACT_RATE/2,UE_CONTACT_RATE*2)
 			t.append(v)
 		arr.append(t)
 	return np.array(arr)
@@ -29,13 +30,16 @@ def integrand(t,user_equipments, contact_rate_matrix):
 	s= 0
 	for x in range(len(user_equipments)):
 		for y in range(len(user_equipments)):
-			s += contact_rate_matrix[x][y] / (e ** (user_equipments[x].request_rate + sum(contact_rate_matrix[x])) )* t 
+			lij = contact_rate_matrix[x][y]
+			s += lij / (e ** (user_equipments[x].request_rate + sum(contact_rate_matrix[x])) )* t 
 	return s
 
 
 #this implements equation (10) probability of cache hit at d2d level
 def calculate_p_d2d(user_equipments,contact_rate_matrix, time=CACHE_RETENTION_TIME ):
-	return quad(integrand,0,time, args=(user_equipments,contact_rate_matrix))[0]
+	#assert(p_d2d>=0 and p_d2d <=1)
+	
+	return quad(integrand,1,time, args=(user_equipments,contact_rate_matrix))[0]
 
 
 
