@@ -98,7 +98,7 @@ def initial_ga_setup(edgeserver):
 
 	#create ga_instance
 	ga_instance = pygad.GA(
-		num_generations=500,
+		num_generations=100,
 		gene_type=int,
 		gene_space=[0,1],
 		num_parents_mating=10,
@@ -108,10 +108,9 @@ def initial_ga_setup(edgeserver):
 		mutation_probability = 0.5,
 		mutation_by_replacement=True,
 		mutation_type="random", 
-		parent_selection_type="rank",
+		parent_selection_type="sss",
 		keep_parents=-1,
 		crossover_type="single_point",
-		
 		)
 
 	ga_instance.run()

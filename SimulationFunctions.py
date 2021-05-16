@@ -26,26 +26,9 @@ def get_ue_clusters(user_equipments,num_d2d_clusters=NUM_D2D_CLUSTERS):
 		clusters[u.cluster].append(u) 
 	return clusters
 
-def integrand(t,user_equipments, contact_rate_matrix):
-	s= 0
-	for x in range(len(user_equipments)):
-		for y in range(len(user_equipments)):
-			lij = contact_rate_matrix[x][y]
-			#s += lij / (e ** ((user_equipments[x].request_rate + sum(contact_rate_matrix[x])) * t))
-			if lij:
-				s += pow(e, -((1/user_equipments[x].request_rate + 1/sum(contact_rate_matrix[x])) * t)) /lij
-	return s
-
-
-#this implements equation (10) probability of cache hit at d2d level
-def calculate_p_d2d(user_equipments,contact_rate_matrix, time=CACHE_RETENTION_TIME ):
-	#assert(p_d2d>=0 and p_d2d <=1)
-	
-	return quad(integrand,1,time, args=(user_equipments,contact_rate_matrix))[0]
-
 
 #start writing new pd2d function
-def novel_calculate_p_d2d(contents):
+def calculate_p_d2d(contents):
 	s = 0
 	t1=t2=0
 	for j in range(1,len(contents)+1):
@@ -86,3 +69,27 @@ def min_max_priority(contents, priority_to_choose):
 	b = max(all_priorities)
 	return(a,b)
 
+
+
+'''
+		Defunct method from the samsung paper no longer used
+		
+def integrand(t,user_equipments, contact_rate_matrix):
+	s= 0
+	for x in range(len(user_equipments)):
+		for y in range(len(user_equipments)):
+			lij = contact_rate_matrix[x][y]
+			#s += lij / (e ** ((user_equipments[x].request_rate + sum(contact_rate_matrix[x])) * t))
+			if lij:
+				s += pow(e, -((1/user_equipments[x].request_rate + 1/sum(contact_rate_matrix[x])) * t)) /lij
+	return s
+
+
+#this implements equation (10) probability of cache hit at d2d level
+def _calculate_p_d2d(user_equipments,contact_rate_matrix, time=CACHE_RETENTION_TIME ):
+	#assert(p_d2d>=0 and p_d2d <=1)
+	
+	return quad(integrand,1,time, args=(user_equipments,contact_rate_matrix))[0]
+
+
+'''

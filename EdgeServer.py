@@ -38,7 +38,7 @@ class EdgeServer:
 
 
 	#Allocate cache based on priority selected for all Contents
-	def allocate_cache_from_ue(self, priority_to_choose=PRIORITY_TO_CHOOSE):
+	def allocate_cache_from_ue_and_return_ga(self, priority_to_choose=PRIORITY_TO_CHOOSE):
 		contents = self.contents
 		#lowest and highest priority from contents
 		lower,upper = min_max_priority(contents,priority_to_choose)
@@ -49,7 +49,7 @@ class EdgeServer:
 		
 		
 		self.GA = genetic_algo_decisions(self)
-
+		return self.GA
 
 
 '''		

@@ -13,8 +13,6 @@ clusters = edgeserver.clusters
 
 contact_rate_matrix = calculate_ue_contact_rate_matrix(user_equipments=user_equipments,ue_contact_rate=UE_CONTACT_RATE)
 
-
-
 '''Todo
 	1. [X] Plot priority vs content graph
 	2. [X] Plot num_ue (changing) ,cost,alpha
@@ -37,7 +35,7 @@ csv_ran_cost_vs_alpha(ALPHA, user_equipments,c_ran)
 '''
 
 	#3. [ ] Plot GA convergence
-ga_instance = genetic_algo_decisions(edgeserver)
+ga_instance = edgeserver.allocate_cache_from_ue_and_return_ga()
 
 
 
