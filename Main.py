@@ -54,7 +54,10 @@ ga_instance = edgeserver.allocate_cache_from_ue_and_return_ga()
 best_solutions_fitness = ga_instance.best_solutions_fitness
 #write to csv remember to move into csv immediately if good
 best_solutions_fitness = np.asarray(best_solutions_fitness)
-np.savetxt("fitness%s.csv"%PRIORITY_TO_CHOOSE,best_solutions_fitness)
+
+#write a normalized fitness score so it is easier to plot
+data = best_solutions_fitness/best_solutions_fitness.max()
+np.savetxt("fitness%s_normalized.csv"%PRIORITY_TO_CHOOSE,data)
 
 
 
