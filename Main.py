@@ -20,7 +20,7 @@ contact_rate_matrix = calculate_ue_contact_rate_matrix(user_equipments=user_equi
 '''Todo
 	1. [X] Plot priority vs content graph
 	2. [X] Plot num_ue (changing) ,cost,alpha
-	3. [ ] Plot GA convergence
+	3. [X] Plot GA convergence
 
 
 '''
@@ -38,7 +38,8 @@ c_ran = calculate_cost_ran(clusters,contents,p_d2d)
 csv_ran_cost_vs_alpha(ALPHA, user_equipments,c_ran)
 '''
 
-	#3. [ ] Plot GA convergence
+	#3. [X] Plot GA convergence
+'''
 
 #lowest and highest priority from contents
 lower,upper = min_max_priority(contents,PRIORITY_TO_CHOOSE)
@@ -59,7 +60,7 @@ best_solutions_fitness = np.asarray(best_solutions_fitness)
 data = best_solutions_fitness/best_solutions_fitness.max()
 np.savetxt("fitness%s_normalized.csv"%PRIORITY_TO_CHOOSE,data)
 
-
+'''
 
 
 
