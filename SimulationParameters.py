@@ -10,7 +10,7 @@ ALPHA =1.5
 
 
 #0 => power_priority 1=>log_priority, 2=> blind_priority
-PRIORITY_TO_CHOOSE = 1
+PRIORITY_TO_CHOOSE = 2
 
 
 

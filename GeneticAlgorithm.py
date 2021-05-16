@@ -54,8 +54,8 @@ def initial_ga_setup(edgeserver):
 					priority_score += contents[content_ix].priorities[PRIORITY_TO_CHOOSE]
 
 					#if more cache space asked for user than available return 0
-					# if ue_cache_used > user_equipments[ue_ix].storage_space:
-					# 	return 0
+					if ue_cache_used > user_equipments[ue_ix].storage_space:
+						return 0
 
 
 					#????

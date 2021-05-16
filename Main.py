@@ -1,9 +1,12 @@
+import math
+import numpy as np
+
 from EdgeServer import *
 from PlottingFunctions import *
 from SimulationParameters import *
 from SimulationFunctions import *
-import math
 from scipy.integrate import quad
+
 
 #EdgeServer variable for simulation
 edgeserver = EdgeServer()
@@ -47,8 +50,12 @@ print(edgeserver.user_equipments[4].rand_num)
 
 ga_instance = edgeserver.allocate_cache_from_ue_and_return_ga()
 
+#get a list of best fitness values in each generation
+best_solutions_fitness = ga_instance.best_solutions_fitness
+#write to csv remember to move into csv immediately if good
+best_solutions_fitness = np.asarray(best_solutions_fitness)
+np.savetxt("fitness%s.csv"%PRIORITY_TO_CHOOSE,best_solutions_fitness)
 
-#best_solution_fitness = ga_instance.best_solution_fitness
 
 
 
